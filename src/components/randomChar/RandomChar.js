@@ -53,8 +53,6 @@ class RandomChar extends Component {
         const errorMessage = error ?  <ErrorMessage/> : null;
         const spinner = loading ? <Spinner/> : null;
         const content = !(loading || error) ? <View char={char}/> : null;
-        
-        //const charDescr = description ? `${description.slice(0, 230)}...` : 'There is no information about this character'
         return (
             <div className="randomchar">
                 {errorMessage}
