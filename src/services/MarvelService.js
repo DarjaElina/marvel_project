@@ -20,6 +20,14 @@ const useMarvelService = () => {
         const res = await request(`${_apiBase}comics?limit=8&offset=${offset}&${_apiKey}`)
         return res.data.results.map(_transformComic);
     }
+
+    const findCharacter = async (name) => {
+        const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);
+        if (res.data.results.length === 0) {
+            throw new Error("There is no such character. Check the name and try again.")
+        }
+        return _transformCharacter(res.data.results[0]);
+    }
     
 
     const getCharacter = async (id) => {
@@ -57,7 +65,7 @@ const useMarvelService = () => {
         
     }
 
-    return {loading, error, getAllCharacters, getCharacter, clearError, getAllComics, getComic}
+    return {loading, error, getAllCharacters, getCharacter, clearError, getAllComics, getComic, findCharacter}
     
 }
 

@@ -5,6 +5,7 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import Skeleton from '../skeleton/Skeleton';
 import './charInfo.scss';
 import useMarvelService from '../../services/MarvelService';
+import CharForm from "../charForm/CharForm";
 
 const CharInfo = (props) => {
 
@@ -50,6 +51,7 @@ const CharInfo = (props) => {
             {errorMessage}
             {spinner}
             {content}
+            <CharForm/>
         </div>
     )
 }
@@ -94,6 +96,7 @@ const View = ({char}) => {
                 }   
                 
             </ul>
+            
         </>
     )
 }
