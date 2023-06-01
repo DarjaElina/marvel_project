@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
@@ -56,6 +57,13 @@ const View = ({char}) => {
 
     return (
         <>
+            <Helmet>
+            <meta
+                name="description"
+                content={`${name} character`}
+                />
+            <title>{name}</title>
+            </Helmet>
             <AppBanner/>
             <div className="single-char">
                 <img style={imgStyle} src={thumbnail} alt={name} className="single-char__img"/>
