@@ -33,7 +33,7 @@ const CharForm = () => {
     
     
 
-    const style = !foundedChar.name ? {"display": "none"} : {"display": "flex", "color": "#03710E", "font-size": 18, "justify-content": "space-between", "align-items": "center", "fontWeight": 700};
+    const style = !foundedChar.name ? {"display": "none"} : {"display": "flex", "color": "#03710E", "font-size": 18, "justifyContent": "space-between", "alignItems": "center", "fontWeight": 700};
 
    
     return (

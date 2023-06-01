@@ -1,10 +1,9 @@
 import { Helmet } from "react-helmet";
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
 import useMarvelService from '../../services/MarvelService';
 import AppBanner from '../appBanner/AppBanner';
+import setContent from '../../utils/setContent';
 
 import './singleCharPage.scss';
 
@@ -13,7 +12,7 @@ const SingleCharPage = () => {
     const {charId} = useParams();
     const [char, setChar] = useState(null);
 
-    const {loading, error, getCharacter, clearError} = useMarvelService();
+    const {getCharacter, clearError, process, setProcess} = useMarvelService();
 
 
     useEffect(() => {
@@ -25,6 +24,7 @@ const SingleCharPage = () => {
         clearError();
         getCharacter(charId)
             .then(onCharLoaded)
+            .then(() => setProcess('confirmed'))
     }
 
     
@@ -34,22 +34,18 @@ const SingleCharPage = () => {
     
 
     
-    const errorMessage = error ?  <ErrorMessage/> : null;
-    const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error || !char) ? <View char={char}/> : null;
+ 
 
 
     return (
         <>
-            {errorMessage}
-            {spinner}
-            {content}
+           {setContent(process, View, char)}
         </>
     )
 }
 
-const View = ({char}) => {
-    const {name, description, thumbnail} = char;
+const View = ({data}) => {
+    const {name, description, thumbnail} = data;
     let imgStyle = {'objectFit' : 'cover'};
             if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = {'objectFit' : 'unset'};
